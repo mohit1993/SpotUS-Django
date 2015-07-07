@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>SpotUs | Spot the EVENTS</title>
+	</head>
+
+	<body>
+		{% if user.is_authenticated %}
+			Welcome,
+			{% if user.groups.get(name = 'normal_user').exists %}
+				<a href = "{{ user.useraccount.get_absolute_url }}">{{user.useraccount.firstName}}</a>
+			{% else %}
+				<a href = "{{ user.organiseraccount.get_absolute_url }}">{{user.organiseraccount.firstName}}</a>(organiser)
+			{% endif %}
+			| <a href = "{% url "logout" %}?next={{ request.path }}">logout</a>
+		{% else %}
+			Login as 
+			<a href = "{% url "user_login" %}">user</a>|<a href = "{% url "organiser_login" %}">organiser</a>
+			<br>
+			Regiser as
+			<a href = "{% url "user_register" %}">user</a>|<a href = "{% url "organiser_register" %}">organiser</a>
+		{% endif %}
+
+		{% if event_list %}
+			{%for event in event_list %}
+				<a href = "{{ event.get_absolute_url }}"><h3>{{event.eventName}}</h3></a>
+				{% if event.eventPoster %}
+				<img src = "{{event.eventPoster.url}}" height = "140" width = "100">
+				{% endif %}
+				{{event.eventCaption}}
+				<br>Event On: 
+				{{event.eventDate}}
+			{% endfor %}
+
+			{% if is_paginated %}
+				<div class="pagination">
+					<span class="page-links">
+						{% if page_obj.has_previous %}
+							<a href="/events?page={{ page_obj.previous_page_number }}">prev</a>
+						{% endif %}
+
+						 <span class="page-current">
+                  		  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+               			 </span>
+
+						{% if page_obj.has_next %}
+                    		<a href="/events?page={{ page_obj.next_page_number }}">next</a>
+              		  	{% endif %}
+            		</span>
+        		</div>
+    		{% endif %}
+    	{% else %}
+    		<h2>Events</h2>
+    		<p>No events found!!!! </p>
+    	{% endif %}
+    </body>

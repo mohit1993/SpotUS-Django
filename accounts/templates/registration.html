@@ -1,0 +1,84 @@
+<html>
+<head>
+	<title>{% block title %}SpotUs| New User{% endblock %}</title>
+</head>
+	
+<body>
+
+	<form enctype = "multipart/form-data" action = {% block actionurl %}"{% url "user_register" %}"{% endblock %} method = "POST">
+	{% csrf_token %}
+	{{form.non_field_errors }}
+	<div class = "formField">
+		{{form.profilePic.errors}}
+		<label for = "id_profilePic">Profile Picture </label>
+		{{form.profilePic}}
+	</div>
+	<div class = "formFields">
+		{{form.firstName.errors}}
+		{{form.lastName.errors}}
+		<label for = "id_firstName">First Name</label>
+		{{form.firstName}}
+		<label for = "id_lastName">Last Name</label>
+		{{form.lastName}}
+	</div>
+	<div class = "formFields">
+		{{form.username.errors}}
+		<label for = "id_username">Username</label>
+		{{form.username}}
+	</div>
+	<div class = "formFields">
+		{{form.password.errors}}
+		<label for = "id_password">Password</label>
+		{{form.password}}
+	</div>
+	<div class = "formFields">
+		{{form.confirmPassword.errors}}
+		<label for = "id_confirmPassword">Confirm Password</label>
+		{{form.confirmPassword}}
+	</div>
+	<div class = "formFields">
+		{{form.dateOfBirth.errors}}
+		<label for = "id_dateOfBirth">Date of Birth</label>
+		{{form.dateOfBirth}}
+	</div>
+	<div class = "formFields">
+		{{form.gender.errors}}
+		<label for = "id_gender">Gender</label>
+		{{form.gender}}
+	</div>
+	<div class = "formFields">
+		{{form.contactNumber.errors}}
+		<label for = "id_contactNumber">Mobile Number</label>
+		{{form.contactNumber}}
+	</div>
+	{% block organiserwebsite %}{% endblock %}
+	<div class = "formFields">
+		{{form.address.errors}}
+		<label for = "id_address">Address</label>
+		{{form.address}}
+	</div>
+	<div class = "formFields">
+		{{form.city.errors}}
+		<label for = "id_city">City</label>
+		{{form.city}}
+	</div>
+	<div class = "formFields">
+		{{form.country.errors}}
+		<label for = "id_country">Country</label>
+		{{form.country}}
+	</div>
+	<div class = "formFields">
+		{{form.pincode.errors}}
+		<label for = "id_pincode">Pincode</label>
+		{{form.pincode}}
+	</div>
+	<div class = "formFields">
+		{{form.email.errors}}
+		<label for = "id_email">Email ID</label>
+		{{form.email}}
+	</div>
+	{% block organiserattributes %}{% endblock %}
+	<div class = "formFields">
+		<input type = "submit" value = "Register">
+	</div>
+</form>

@@ -1,0 +1,26 @@
+{% extends "registration.html" %}
+
+{% block title %}Spotus| New Organiser{% endblock %}
+
+{% block actionurl %}"{% url "organiser_register" %}"{% endblock %}
+
+{% block organiserwebsite %}
+	<div class = "formFields">
+		{{form.personalWebsite.errors}}
+		<label for = "id_personalWebsite">Personal Website</label>
+		{{form.personalWebsite}}
+	</div>
+{% endblock %}
+
+{% block organiserattributes %}
+	<div class = "formFields">
+		{{form.companyName.errors}}
+		<label for = "id_CompanyName">Company Name</label>
+		{{form.companyName}}
+	</div>
+	<div class = "formFields">
+		{{form.companyWebsite.errors}}
+		<label for = "id_companyWebsite">Company Website</label>
+		{{form.companyWebsite}}
+	</div>
+{% endblock %}

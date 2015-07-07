@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<title>SpotUs| New Event</title>
+	</head>
+
+	<body>
+		<form enctype = "multipart/form-data" action = "{% url "newevent" %}" method = "POST">
+		{% csrf_token %}
+		{{form.non_field_errors}}
+		<div class = "formField">
+			{{form.eventPoster.error}}
+			<label for = "id_eventPoster">Event Poster</label>
+			{{form.eventPoster}}
+		</div>
+
+		<div class = "formField">
+			{{form.eventName.error}}
+			<label for = "id_eventName">Event Title</label>
+			{{form.eventName}}
+		</div>
+
+		<div class = "formField">
+			{{form.eventCaption.error}}
+			<label for = "id_eventCaption">Caption</label>
+			{{form.eventCaption}}
+		</div>
+
+		<div class = "formField">
+			{{form.eventDate.error}}
+			<label for = "id_eventData">Event On</label>
+			{{form.eventDate}}
+		</div>
+
+		<div class = "formField">
+			{{form.duration.error}}
+			<label for = "id_duration">Duration(in days)</label>
+			{{form.duration}}
+		</div>
+
+		<div class = "formField">
+			{{form.venue.error}}
+			<label for = "id_venue">Event Venue</label>
+			{{form.venue}}
+		</div>
+
+		<div class = "formField">
+			{{form.description.error}}
+			<label for = "id_description">Describe the Event</label>
+			{{form.description}}
+		</div>
+
+		<div class = "formField">
+			<input type = "submit" value = "Create Event" />
+		</div>
+	</form>
+

@@ -1,0 +1,8 @@
+#ignore folders
+django-allauth
+allauth
+sptenv
+
+#ignore files
+dump.json
+

@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title>Spotus| {{obj.firstName}} {{obj.lastName}} | Organiser</title>
+	</head>
+
+	<body>
+		{% if user.is_authenticated %}
+			Welcome,
+			{% if user.groups.all.0.name == 'normal_user'  %}
+				<a href = "{{ user.useraccount.get_absolute_url }}">{{user.useraccount.firstName}}</a>
+			{% else %}
+				<a href = "{{ user.organiseraccount.get_absolute_url }}">{{user.organiseraccount.firstName}}</a>(organiser)
+			{% endif %}
+			| <a href = "{% url "logout" %}?next={{ request.path }}">logout</a>
+		{% else %}
+			Login as 
+			<a href = "{% url "user_login" %}?next={{ request.path }}">user</a>|<a href = "{% url "organiser_login" %}?next={{ request.path }}">organiser</a>
+			<br>
+			Regiser as
+			<a href = "{% url "user_register" %}">user</a>|<a href = "{% url "organiser_register" %}">organiser</a>
+		{% endif %}
+		<br>
+
+		{% if obj.profilePic %}
+		<img src = "{{obj.profilePic.url}}" height = "120" width = "120">
+		{% endif %}
+		<h2>{{obj.firstName}} {{obj.lastName}}</h2>
+		<b>Phone No.</b> {{obj.contactNumber}}
+		<br>
+		<b>Email</b> {{obj.email}}
+		<br>
+		<b>Website</b> <a href = "http://{{obj.personalWebsite}}" target="_blank">{{obj.personalWebsite}}</a>
+		<br><b>Gender: </b>
+		{% if obj.gender == 'M' %}
+			Male
+		{% else %}
+			Female
+		{% endif %}
+		<br>
+		<b>Born on</b> {{obj.dateOfBirth}}
+		<br>
+		<b>Organiser since</b> {{obj.dateOfJoining}}
+		<br>
+		<b>Lives at</b> {{obj.address}},{{obj.city}},{{obj.country}}.{{obj.pincode}}
+		<br>
+		<b>Works for</b> {{obj.companyName}}
+		<br>
+		<b>Website </b><a href = "http://{{obj.companyWebsite}}" target="_blank">{{obj.companyWebsite}}</a>
+		{% if obj.event_set.count %}
+			<h3>Events Organised</h3>
+			{% for event in obj.event_set.all %}
+				{{forloop.counter}}. <a href = "{{event.get_absolute_url}}" target="_blank">{{event.eventName}}</a>
+				<br>
+			{% endfor %}
+		{% endif %}
+		<br><br>
+		<a href = "{% url "newevent" %}" target="_blank">create event</a>
+		<br>
+	</body>
+</html>
+ 

@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>SpotUs| {{event.eventName}}</title>
+	</head>
+
+	<body>
+		{% if user.is_authenticated %}
+			Welcome,
+			{% if user.groups.all.0.name == 'normal_user'  %}
+				<a href = "{{ user.useraccount.get_absolute_url }}">{{user.useraccount.firstName}}</a>
+			{% else %}
+				<a href = "{{ user.organiseraccount.get_absolute_url }}">{{user.organiseraccount.firstName}}</a>(organiser)
+			{% endif %}
+			| <a href = "{% url "logout" %}?next={{ request.path }}">logout</a>
+		{% else %}
+			Login as 
+			<a href = "{% url "user_login" %}?next={{ request.path }}">user</a>|<a href = "{% url "organiser_login" %}?next={{ request.path }}">organiser</a>
+			<br>
+			Regiser as
+			<a href = "{% url "user_register" %}">user</a>|<a href = "{% url "organiser_register" %}">organiser</a>
+		{% endif %}
+		<br>
+		{% if event.eventPoster %}
+		<img src = "{{event.eventPoster.url}}" height = "500" width = "400">
+		{% endif %}
+		<p><h1>{{event.eventName}}</h1>
+		<h3>{{event.eventCaption}}</h3>
+		<br><h4>Date</h4>{{event.eventDate}}</p>
+		<br>Venue: {{event.venue}}
+		<br>Duration: {{event.duration}}
+		<br>Organised by: <a href = "{{event.organiser.get_absolute_url}}" target="_blank">{{ event.organiser.firstName }}<a>
+		<br><h4>Description</h4>{{event.description}}
+
+
+

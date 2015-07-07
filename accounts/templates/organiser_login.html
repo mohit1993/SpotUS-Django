@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>SpotUs| Organiser Login</title>
+	</head>
+
+	<body>
+		<form method = "POST" action = "{% url "organiser_login" %}?next={{request.path}}" 
+		enctype = "multipart/form-data">
+		{% csrf_token %}
+		<div class = "loginFields">
+			{{form.username.errors}}
+			<label for = "id_username">Username</label>
+			{{form.username}}
+		</div>
+		<div class = "loginField">
+			{{form.password.errors}}
+			<label for = "id_password">Password</label>
+			{{form.password}}
+		</div>
+
+		<div class = "loginField">
+			<input type = "submit" value = "Login" />
+		</div>
+		</form>
+		<a href = "{% url "organiser_register" %}">Register</a>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>SpotUs| User Login</title>
+	</head>
+
+	<body>
+		<form method = "POST" action = "{% url "user_login" %}?next={{request.path}}" 
+		enctype = "multipart/form-data">
+		{% csrf_token %}
+		<div class = "loginFields">
+			{{form.username.errors}}
+			<label for = "id_username">Username</label>
+			{{form.username}}
+		</div>
+		<div class = "loginField">
+			{{form.password.errors}}
+			<label for = "id_password">Password</label>
+			{{form.password}}
+		</div>
+		<div class = "loginField">
+			<input type = "hidden" name = "group_name" value = "normal_user">
+		</div>
+
+		<div class = "loginField">
+			<input type = "submit" value = "Login" />
+		</div>
+		</form>
+		<a href = "{% url "user_register" %}">Register</a>
+	</body>
+</html>
